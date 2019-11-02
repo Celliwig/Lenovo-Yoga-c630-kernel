@@ -103,6 +103,7 @@ static struct arm_smmu_device *cavium_smmu_impl_init(struct arm_smmu_device *smm
 	return &cs->smmu;
 }
 
+
 #define ARM_MMU500_ACTLR_CPRE		(1 << 1)
 
 #define ARM_MMU500_ACR_CACHE_LOCK	(1 << 26)
@@ -192,8 +193,10 @@ struct arm_smmu_device *arm_smmu_impl_init(struct arm_smmu_device *smmu)
 				  "calxeda,smmu-secure-config-access"))
 		smmu->impl = &calxeda_impl;
 
-	if (of_device_is_compatible(smmu->dev->of_node, "qcom,sdm845-smmu-500"))
-		smmu->impl = &qcom_sdm845_smmu500_impl;
+	if (of_device_is_compatible(smmu->dev->of_node, "qcom,sdm845-smmu-500")) {
+		if (qcom_scm_qsmmu500_wait_safe_toggle(0))		
+			dev_warn(smmu->dev, "Failed to turn off SAFE logic\n");
+	}
 
 	return smmu;
 }
