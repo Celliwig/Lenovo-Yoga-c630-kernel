@@ -408,6 +408,7 @@ int phy_calibrate(struct phy *phy)
 {
 	int ret;
 
+	dev_info(&phy->dev, "Calibrating PHY: %u.\n", phy->id);
 	if (!phy || !phy->ops->calibrate)
 		return 0;
 
