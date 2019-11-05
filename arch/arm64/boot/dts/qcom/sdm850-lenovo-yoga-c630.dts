@@ -403,10 +403,10 @@
 	status = "okay";
 	clock-frequency = <400000>;
 
-//	battery@70 {
-//		compatible = "some,battery";
-//		reg = <0x70>;
-//	};
+	battery@70 {
+		compatible = "some,battery";
+		reg = <0x70>;
+	};
 };
 
 &i2c3 {
@@ -465,10 +465,10 @@
 	};
 };
 
-//&i2c10 {
-//	status = "okay";
-//	clock-frequency = <400000>;
-//
+&i2c10 {
+	status = "okay";
+	clock-frequency = <400000>;
+
 //	sn65dsi86: bridge@2c {
 //		compatible = "ti,sn65dsi86";
 //		reg = <0x2c>;
@@ -517,7 +517,7 @@
 //			};
 //		};
 //	};
-//};
+};
 
 //&mdss {
 //	status = "okay";
@@ -529,6 +529,14 @@
 
 &mss_pil {
 	firmware-name = "qcom/c630/qcdsp1v2850.mbn", "qcom/c630/qcdsp2850.mbn";
+};
+
+&qup_i2c10_default {
+	pinconf {
+		pins = "gpio55", "gpio56";
+		drive-strength = <2>;
+		bias-disable;
+	};
 };
 
 &qup_i2c12_default {
