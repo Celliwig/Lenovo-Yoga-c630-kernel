@@ -443,3 +443,5 @@ static struct i2c_driver some_battery_i2c_driver = {
 	.id_table = some_battery_i2c_id_table,
 };
 module_i2c_driver(some_battery_i2c_driver);
+// Assume GPL license. Needed to function as a module, as opposed to being builtin.
+MODULE_LICENSE("GPL");
